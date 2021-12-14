@@ -120,22 +120,11 @@ const row4 = [circleEl[28], circleEl[29], circleEl[30], circleEl[31], circleEl[3
 const row5 = [circleEl[35], circleEl[36], circleEl[37], circleEl[38], circleEl[39], circleEl[40], circleEl[41]];
 const rows = [row0, row1, row2, row3, row4, row5]; 
 
-console.log(row0[0])
-console.log(rows)
+
 // event listeners
 // what this means is that upon clicking the 'replay' button. init function will run
 document.querySelector("#replay").addEventListener("click", init);
-
-
-let boards = [
-    [null,null,null,null,null,null],
-    [null,null,null,null,null,null],
-    [null,null,null,null,null,null],
-    [null,null,null,null,null,null],
-    [null,null,null,null,null,null],
-    [null,null,null,null,null,null],
-    [null,null,null,null,null,null],
-]
+document.querySelector(".gameBoard").addEventListener("click", handleClick)
 
 // write a function that updates boards
 // it needs to take two parameters
@@ -144,19 +133,18 @@ let boards = [
 // function -> if the counter is even, update boards at x & y to be true (bracket notation)
 //  else, update boards at x & y to be false;
 //  then test it out w/o click function
-let counter;
+let counter = 0;
 
-function updateBoards(col,row){
-    if (counter % 2)
-}
 
 // *----functions that will actually help us play the game ----* //
 init();
 
+
 function handleClick(e){
-    const circle = e.target;
+    let circle = e.target;
     console.log(circle);
 };
+
 
 function checkWinner(){
 
@@ -180,8 +168,5 @@ function init() {
     // add turnmsg.innerText 
     turn = 1;
     winner = null;
-    // what this means is, that when the game board is clicked (anywhere), the handleClick 
-// function will run
-    document.querySelector(".gameBoard").addEventListener("click", handleClick)
     render();
 }
