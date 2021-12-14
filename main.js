@@ -101,31 +101,87 @@ const winnermsgEl = document.querySelector("#turn-message"); //<- possibly chang
 
 
 // columns
-const column0 = [circleEl[35], circleEl[28], circleEl[21], circleEl[14], circleEl[7], circleEl[0], circleEl[0]];
-const column1 = [circleEl[36], circleEl[29], circleEl[22], circleEl[15], circleEl[8], circleEl[1], circleEl[1]];
-const column2 = [circleEl[37], circleEl[30], circleEl[23], circleEl[16], circleEl[9], circleEl[2], circleEl[2]];
-const column3 = [circleEl[38], circleEl[31], circleEl[24], circleEl[17], circleEl[10], circleEl[3], circleEl[3]];
-const column4 = [circleEl[39], circleEl[32], circleEl[25], circleEl[18], circleEl[11], circleEl[4], circleEl[4]];
-const column5 = [circleEl[40], circleEl[33], circleEl[26], circleEl[19], circleEl[12], circleEl[5], circleEl[5]];
-const column6 = [circleEl[41], circleEl[34], circleEl[27], circleEl[20], circleEl[13], circleEl[6], circleEl[6]];
-const columns = [column0, column1, column2, column3, column4, column5, column6];
+const column1 = [circleEl[35], circleEl[28], circleEl[21], circleEl[14], circleEl[7], circleEl[0]];
+const column2 = [circleEl[36], circleEl[29], circleEl[22], circleEl[15], circleEl[8], circleEl[1]];
+const column3 = [circleEl[37], circleEl[30], circleEl[23], circleEl[16], circleEl[9], circleEl[2]];
+const column4 = [circleEl[38], circleEl[31], circleEl[24], circleEl[17], circleEl[10], circleEl[3]];
+const column5 = [circleEl[39], circleEl[32], circleEl[25], circleEl[18], circleEl[11], circleEl[4]];
+const column6 = [circleEl[40], circleEl[33], circleEl[26], circleEl[19], circleEl[12], circleEl[5]];
+const column7 = [circleEl[41], circleEl[34], circleEl[27], circleEl[20], circleEl[13], circleEl[6]];
+const columns = [column1, column2, column3, column4, column5, column5, column7];
 
+// rows
+
+const row0 = [circleEl[0], circleEl[1], circleEl[2], circleEl[3], circleEl[4], circleEl[5], circleEl[6]];
+const row1 = [circleEl[7], circleEl[8], circleEl[9], circleEl[10], circleEl[11], circleEl[12], circleEl[13]];
+const row2 = [circleEl[14], circleEl[15], circleEl[16], circleEl[17], circleEl[18], circleEl[19], circleEl[20]];
+const row3 = [circleEl[21], circleEl[22], circleEl[23], circleEl[24], circleEl[25], circleEl[26], circleEl[27]];
+const row4 = [circleEl[28], circleEl[29], circleEl[30], circleEl[31], circleEl[32], circleEl[33], circleEl[34]];
+const row5 = [circleEl[35], circleEl[36], circleEl[37], circleEl[38], circleEl[39], circleEl[40], circleEl[41]];
+const rows = [row0, row1, row2, row3, row4, row5]; 
+
+console.log(row0[0])
+console.log(rows)
 // event listeners
-
-// what this means is that upon clicking the 'replay' button. the game will init
+// what this means is that upon clicking the 'replay' button. init function will run
 document.querySelector("#replay").addEventListener("click", init);
 
-// what this means is, that when the game board is clicked (anywhere), the handleClick 
-// function will run
-document.querySelector(".gameBoard").addEventListener("click", handleClick)
 
-// functions that will actually help us play the game
+let boards = [
+    [null,null,null,null,null,null],
+    [null,null,null,null,null,null],
+    [null,null,null,null,null,null],
+    [null,null,null,null,null,null],
+    [null,null,null,null,null,null],
+    [null,null,null,null,null,null],
+    [null,null,null,null,null,null],
+]
 
-function init(){
-    board = null;
-    turn = 1;
-    winner = null;
-    render();
+// write a function that updates boards
+// it needs to take two parameters
+// that are going to represent x & y for our column & row
+// & have a counter to keep track of score (make it global)
+// function -> if the counter is even, update boards at x & y to be true (bracket notation)
+//  else, update boards at x & y to be false;
+//  then test it out w/o click function
+let counter;
+
+function updateBoards(col,row){
+    if (counter % 2)
 }
 
+// *----functions that will actually help us play the game ----* //
 init();
+
+function handleClick(e){
+    const circle = e.target;
+    console.log(circle);
+};
+
+function checkWinner(){
+
+}
+
+function render(){
+
+}
+
+
+function init() {
+    board = [
+        [null, null, null, null, null, null],
+        [null, null, null, null, null, null],
+        [null, null, null, null, null, null],
+        [null, null, null, null, null, null],
+        [null, null, null, null, null, null],
+        [null, null, null, null, null, null],
+        [null, null, null, null, null, null]
+    ];
+    // add turnmsg.innerText 
+    turn = 1;
+    winner = null;
+    // what this means is, that when the game board is clicked (anywhere), the handleClick 
+// function will run
+    document.querySelector(".gameBoard").addEventListener("click", handleClick)
+    render();
+}

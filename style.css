@@ -35,4 +35,7 @@
    width: 75px;
   }
   
+  .cell:hover{
+      background-color: aliceblue;
+  }
  
