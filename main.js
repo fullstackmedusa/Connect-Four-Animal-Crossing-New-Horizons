@@ -87,6 +87,7 @@ let playerTurn;
 let winner;
 let board;
 
+
 // cache the elements from the HTML that we will be referring back to often
 // for example the message that announces the winner, the message that 
 // tells us whose turn it is
@@ -94,6 +95,20 @@ let board;
 const circleEl = document.querySelectorAll(".cell");
 const turnmsgEl = document.querySelector("#winner-msg"); // <-- possibly chnge to span
 const winnermsgEl = document.querySelector("#turn-message"); //<- possibly change to span
+
+// scrapped the table for a bunch of divs so we have to store the value of each div cell 
+// in an array and then make and array of array for columns and rows
+
+
+// columns
+const column0 = [circleEl[35], circleEl[28], circleEl[21], circleEl[14], circleEl[7], circleEl[0], circleEl[0]];
+const column1 = [circleEl[36], circleEl[29], circleEl[22], circleEl[15], circleEl[8], circleEl[1], circleEl[1]];
+const column2 = [circleEl[37], circleEl[30], circleEl[23], circleEl[16], circleEl[9], circleEl[2], circleEl[2]];
+const column3 = [circleEl[38], circleEl[31], circleEl[24], circleEl[17], circleEl[10], circleEl[3], circleEl[3]];
+const column4 = [circleEl[39], circleEl[32], circleEl[25], circleEl[18], circleEl[11], circleEl[4], circleEl[4]];
+const column5 = [circleEl[40], circleEl[33], circleEl[26], circleEl[19], circleEl[12], circleEl[5], circleEl[5]];
+const column6 = [circleEl[41], circleEl[34], circleEl[27], circleEl[20], circleEl[13], circleEl[6], circleEl[6]];
+const columns = [column0, column1, column2, column3, column4, column5, column6];
 
 // event listeners
 
