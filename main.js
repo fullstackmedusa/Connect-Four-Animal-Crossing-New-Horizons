@@ -6,7 +6,7 @@
 
 const players = {
     "1": "red",
-    "-1": "black",
+    "-1": "yellow",
     null: "white",
 };
 
@@ -91,7 +91,7 @@ const winningCombos = [
 
 // these are our state variables. they will keep track of whose turn it is, if anyone has won
 // and what board spots have already been taken and by what player
-let playerTurn;
+let currentPlayer;
 let winner;
 let board;
 let counter = 0;
@@ -104,7 +104,7 @@ let counter = 0;
 // and the circles on the board
 const circleEl = document.querySelectorAll(".cell");
 const turnmsgEl = document.querySelector("#winner-msg"); // <-- possibly chnge to span
-const winnermsgEl = document.querySelector("#turn-message"); //<- possibly change to span
+const currentPlayerEl = document.querySelector("#current-player"); // will display current player
 
 
 
@@ -129,11 +129,22 @@ document.querySelector(".gameBoard").addEventListener("click", handleClick)
 init();
 
 function handleClick(e){
+    console.log(e.target.className)
+    if (!e.target.className.includes('cell')) return;
+     
     let circle = e.target;
     console.log(circle);
     counter++;
+    if (currentPlayer === "1"){
+            circle.style.backgroundColor = "red";
+        } else {
+            circle.style.backgroundColor = "yellow";
+        }
+        
     
-    updateBoard();
+    switchPlayer();
+    render();
+    console.log(currentPlayer)
 };
 
 function updateBoard(x,y){
@@ -150,6 +161,15 @@ function updateBoard(x,y){
     }
 
 }
+
+function switchPlayer() {
+    if (currentPlayer === "1") {
+        currentPlayer = "-1";
+    } else {
+        currentPlayer = "1";
+    }
+};
+
 
 
 // updateBoard(0,0);
@@ -173,21 +193,27 @@ function checkWinner(){
 
 function render() {
     board.forEach(function (col, idx) {
-        console.log(col);
-        col.forEach(function (cell){
+        
+        col.forEach(function (cell,index){
+            
+            // console.log(col, idx, "<-- column",cell, index, "<-- row");
+            // console.log(circleEl[idx][index]);
+            // console.log(board[idx][index]);
+            if(circleEl[index].className === `cell row-${index} col-${idx}` && cell === null){
+             console.log("grabbing the string");
+             circleEl[index].style.backgroundColor = "white";
+            } 
             if (cell === true) {
-                circleEl[idx].style.backgroundColor = "red";
+                circleEl[index].style.backgroundColor = "red";
               } else if (cell === false) {
-                circleEl[idx].style.backgroundColor = "black";
-              } else {
-                circleEl[idx].style.backgroundColor = "white";
+                circleEl[index].style.backgroundColor = "yellow";
               }
         });
       
     });
   }
 
-//   
+  
 
   
 
@@ -202,8 +228,7 @@ function init() {
         [null, null, null, null, null, null],
         [null, null, null, null, null, null]
     ];
-    // add turnmsg.innerText 
-    turn = 1;
+    currentPlayer = "1"; 
     winner = null;
     render();
 }
