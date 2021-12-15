@@ -1,3 +1,5 @@
+// ---------- Constants -------- //
+
 // game constants. Below is the object for player. It will be either player (1)
 // or player 2's (-1) turn. We have null as an option for when we start the game.
 // it is our empty spaces
@@ -81,12 +83,20 @@ const winningCombos = [
     [13, 20, 27, 34],
     [9, 17, 25, 33],
   ];
-// these are out state variables. they will keep track of whose turn it is, if anyone has won
+
+ 
+
+
+//                      ----- State Variables ----- 
+
+// these are our state variables. they will keep track of whose turn it is, if anyone has won
 // and what board spots have already been taken and by what player
 let playerTurn;
 let winner;
 let board;
+let counter = 0;
 
+//                   ------ Cached Element References ------
 
 // cache the elements from the HTML that we will be referring back to often
 // for example the message that announces the winner, the message that 
@@ -96,35 +106,17 @@ const circleEl = document.querySelectorAll(".cell");
 const turnmsgEl = document.querySelector("#winner-msg"); // <-- possibly chnge to span
 const winnermsgEl = document.querySelector("#turn-message"); //<- possibly change to span
 
-// scrapped the table for a bunch of divs so we have to store the value of each div cell 
-// in an array and then make and array of array for columns and rows
 
 
-// columns
-const column1 = [circleEl[35], circleEl[28], circleEl[21], circleEl[14], circleEl[7], circleEl[0]];
-const column2 = [circleEl[36], circleEl[29], circleEl[22], circleEl[15], circleEl[8], circleEl[1]];
-const column3 = [circleEl[37], circleEl[30], circleEl[23], circleEl[16], circleEl[9], circleEl[2]];
-const column4 = [circleEl[38], circleEl[31], circleEl[24], circleEl[17], circleEl[10], circleEl[3]];
-const column5 = [circleEl[39], circleEl[32], circleEl[25], circleEl[18], circleEl[11], circleEl[4]];
-const column6 = [circleEl[40], circleEl[33], circleEl[26], circleEl[19], circleEl[12], circleEl[5]];
-const column7 = [circleEl[41], circleEl[34], circleEl[27], circleEl[20], circleEl[13], circleEl[6]];
-const columns = [column1, column2, column3, column4, column5, column5, column7];
+//             -------- Event Listeners ------
 
-// rows
-
-const row0 = [circleEl[0], circleEl[1], circleEl[2], circleEl[3], circleEl[4], circleEl[5], circleEl[6]];
-const row1 = [circleEl[7], circleEl[8], circleEl[9], circleEl[10], circleEl[11], circleEl[12], circleEl[13]];
-const row2 = [circleEl[14], circleEl[15], circleEl[16], circleEl[17], circleEl[18], circleEl[19], circleEl[20]];
-const row3 = [circleEl[21], circleEl[22], circleEl[23], circleEl[24], circleEl[25], circleEl[26], circleEl[27]];
-const row4 = [circleEl[28], circleEl[29], circleEl[30], circleEl[31], circleEl[32], circleEl[33], circleEl[34]];
-const row5 = [circleEl[35], circleEl[36], circleEl[37], circleEl[38], circleEl[39], circleEl[40], circleEl[41]];
-const rows = [row0, row1, row2, row3, row4, row5]; 
-
-
-// event listeners
 // what this means is that upon clicking the 'replay' button. init function will run
 document.querySelector("#replay").addEventListener("click", init);
 document.querySelector(".gameBoard").addEventListener("click", handleClick)
+
+
+
+//           ----- Functions -----
 
 // write a function that updates boards
 // it needs to take two parameters
@@ -133,26 +125,71 @@ document.querySelector(".gameBoard").addEventListener("click", handleClick)
 // function -> if the counter is even, update boards at x & y to be true (bracket notation)
 //  else, update boards at x & y to be false;
 //  then test it out w/o click function
-let counter = 0;
 
-
-// *----functions that will actually help us play the game ----* //
 init();
-
 
 function handleClick(e){
     let circle = e.target;
     console.log(circle);
+    counter++;
+    
+    updateBoard();
 };
+
+function updateBoard(x,y){
+    if (counter % 2){
+        // console.log(board[x][y]);
+        // console.log(counter);
+        // console.log("false");
+        board[x][y]= false
+    }else {
+        // console.log(board[x][y]);
+        // console.log(counter);
+        // console.log("true");
+        board[x][y]= true;
+    }
+
+}
+
+
+// updateBoard(0,0);
+// counter++;
+// updateBoard(5,5);
+// counter++;
+// updateBoard(3,4);
+// counter++;
+// console.log(counter);
+// console.log(board);
+
+
+
+
+
 
 
 function checkWinner(){
 
 }
 
-function render(){
+function render() {
+    board.forEach(function (col, idx) {
+        console.log(col);
+        col.forEach(function (cell){
+            if (cell === true) {
+                circleEl[idx].style.backgroundColor = "red";
+              } else if (cell === false) {
+                circleEl[idx].style.backgroundColor = "black";
+              } else {
+                circleEl[idx].style.backgroundColor = "white";
+              }
+        });
+      
+    });
+  }
 
-}
+//   
+
+  
 
 
 function init() {
@@ -170,3 +207,15 @@ function init() {
     winner = null;
     render();
 }
+
+
+
+ // columns
+ const column1 = [circleEl[35], circleEl[28], circleEl[21], circleEl[14], circleEl[7], circleEl[0]];
+ const column2 = [circleEl[36], circleEl[29], circleEl[22], circleEl[15], circleEl[8], circleEl[1]];
+ const column3 = [circleEl[37], circleEl[30], circleEl[23], circleEl[16], circleEl[9], circleEl[2]];
+ const column4 = [circleEl[38], circleEl[31], circleEl[24], circleEl[17], circleEl[10], circleEl[3]];
+ const column5 = [circleEl[39], circleEl[32], circleEl[25], circleEl[18], circleEl[11], circleEl[4]];
+ const column6 = [circleEl[40], circleEl[33], circleEl[26], circleEl[19], circleEl[12], circleEl[5]];
+ const column7 = [circleEl[41], circleEl[34], circleEl[27], circleEl[20], circleEl[13], circleEl[6]];
+ const columns = [column1, column2, column3, column4, column5, column5, column7];
