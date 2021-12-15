@@ -133,15 +133,17 @@ function handleClick(e){
     if (!e.target.className.includes('cell')) return;
      
     let circle = e.target;
+    let x = e.target.className.includes()
+    let y =
     console.log(circle);
-    counter++;
+    counter = counter + 1;
     if (currentPlayer === "1"){
             circle.style.backgroundColor = "red";
         } else {
             circle.style.backgroundColor = "yellow";
         }
         
-    
+    updateBoard();
     switchPlayer();
     render();
     console.log(currentPlayer)
@@ -150,9 +152,9 @@ function handleClick(e){
 function updateBoard(x,y){
     if (counter % 2){
         // console.log(board[x][y]);
-        // console.log(counter);
+        console.log(counter);
         // console.log("false");
-        board[x][y]= false
+        board[x][y]= false;
     }else {
         // console.log(board[x][y]);
         // console.log(counter);
@@ -199,6 +201,7 @@ function render() {
             // console.log(col, idx, "<-- column",cell, index, "<-- row");
             // console.log(circleEl[idx][index]);
             // console.log(board[idx][index]);
+            // if( circleEl[index] === undefined) return
             if(circleEl[index].className === `cell row-${index} col-${idx}` && cell === null){
              console.log("grabbing the string");
              circleEl[index].style.backgroundColor = "white";
