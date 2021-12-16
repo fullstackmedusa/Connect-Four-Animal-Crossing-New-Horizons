@@ -103,7 +103,6 @@ let counter = 0;
 // tells us whose turn it is
 // and the circles on the board
 const circleEl = document.querySelectorAll(".cell");
-const turnmsgEl = document.querySelector("#winner-msg"); // <-- possibly chnge to span
 const currentPlayerEl = document.querySelector("#current-player"); // will display current player
 
 
@@ -140,48 +139,43 @@ function handleClick(e){
     let rowArg = circle.className[9];
     console.log(rowArg);
     counter = counter + 1;
-    
-    for (let i = 0; i < circleEl.length ; i++){
-        circleEl[i].onclick = () =>{
-            if (circelEl[i + 5] === null){
-                if (currentPlayer === 1){
-                    circleEl[i].classList.add("red")
-                }
-                if (currentPlayer === 2){
-                    circleEl[i].classList.add("yellow")
-                }
-            }
-        }
-    }
-
-    if (circleEl.className.includes("red")){
-            circle.style.backgroundColor = "red";
-        } if (circleEl.className.includes("yellow")){
-            circle.style.backgroundColor = "yellow";
-        }
         
     updateBoard(rowArg,colArg);
     switchPlayer();
+    checkWinner();
+    render();
     console.log(currentPlayer)
 };
 
 function updateBoard(x,y){
+    if (board[y][x] !== null){
+        return;
+    }
     if (counter % 2){
         // console.log(board[x][y]);
         console.log(counter);
         // console.log("false");
-        board[x][y]= false;
-        console.log(board);
+        console.log(board[y]);
+        for ( let i = board[y].length - 1; i >= 0 ; i-- ){
+            console.log(board[y][i])
+            if ( board[y][i] === null){
+                board[y][i] = false;
+                return;
+            }
+        }
     }else {
         // console.log(board[x][y]);
         // console.log(counter);
         // console.log("true");
-        board[x][y]= true;
-        console.log(board);
+        for ( let i = board[y].length - 1; i >= 0 ; i-- ){
+            if(board[y][i] === null){
+                board[y][i] = true;
+                return;
+            }
     }
 
 }
-
+}
 function switchPlayer() {
     if (currentPlayer === "1") {
         currentPlayer = "-1";
@@ -218,7 +212,27 @@ function switchPlayer() {
 
 
 function checkWinner(){
-
+    for (let i = 0; i < winningCombos.length; i++){
+        const circle1 = circleEl[winningCombos[i][0]]
+        const circle2 = circleEl[winningCombos[i][1]]
+        const circle3 = circleEl[winningCombos[i][2]]
+        const circle4 = circleEl[winningCombos[i][3]]
+        console.log(circle1)
+        if (circle1.style.backgroundColor === "red" &&
+            circle2.style.backgroundColor === "red" &&
+            circle3.style.backgroundColor === "red" &&
+            circle4.style.backgroundColor === "red")
+            {
+                currentPlayerEl.innerHTML = "Player 1 Wins! Play again?"
+            }
+            if (circle1.style.backgroundColor === "yellow" &&
+                circle2.style.backgroundColor === "yellow" &&
+                circle3.style.backgroundColor === "yellow" &&
+                circle4.style.backgroundColor === "yellow")
+                {
+                    currentPlayerEl.innerHTML = "Player 2 Wins! Play again?"
+                }
+    }
 }
 
 function render() {
@@ -230,10 +244,17 @@ function render() {
             // console.log(circleEl[idx][index]);
             // console.log(board[idx][index]);
             // if( circleEl[index] === undefined) return
-    
-             console.log("grabbing the string");
-             circleEl[index].style.backgroundColor = "white";
-            } 
+            let activeCircle = document.getElementById(`row-${index} col-${idx}`);
+            if(board[idx][index] === null) {
+                activeCircle.style.backgroundColor = 'white'
+            } else if (board[idx][index] === true ){
+                activeCircle.style.backgroundColor = 'red'
+                console.log(activeCircle, board[idx][index])
+            } else {
+                activeCircle.style.backgroundColor = 'yellow'
+                console.log(activeCircle, board[idx][index])
+            }
+            }
             // else if (cell === true) {
             //     circleEl[index].style.backgroundColor = "red";
             //   } else (cell === false);{
