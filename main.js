@@ -1,15 +1,5 @@
 // ---------- Constants -------- //
 
-// game constants. Below is the object for player. It will be either player (1)
-// or player 2's (-1) turn. We have null as an option for when we start the game.
-// it is our empty spaces
-
-const players = {
-    "1": "red",
-    "-1": "yellow",
-    null: "white",
-};
-
 
 const winningCombos = [
     [0, 1, 2, 3],
@@ -117,19 +107,12 @@ document.querySelector(".gameBoard").addEventListener("click", handleClick)
 
 //           ----- Functions -----
 
-// write a function that updates boards
-// it needs to take two parameters
-// that are going to represent x & y for our column & row
-// & have a counter to keep track of score (make it global)
-// function -> if the counter is even, update boards at x & y to be true (bracket notation)
-//  else, update boards at x & y to be false;
-//  then test it out w/o click function
-
 init();
 
 function handleClick(e){
     console.log(e.target.className)
     if (!e.target.className.includes('cell')) return;
+    if(winner !== null) return;
      
     let circle = e.target;
     console.log(circle.className);
@@ -138,13 +121,10 @@ function handleClick(e){
     console.log(colArg);
     let rowArg = circle.className[9];
     console.log(rowArg);
-    counter = counter + 1;
-        
+    counter = counter + 1;  
     updateBoard(rowArg,colArg);
     switchPlayer();
-    checkWinner();
     render();
-    console.log(currentPlayer)
 };
 
 function updateBoard(x,y){
@@ -152,9 +132,9 @@ function updateBoard(x,y){
         return;
     }
     if (counter % 2){
-        // console.log(board[x][y]);
+        
         console.log(counter);
-        // console.log("false");
+        
         console.log(board[y]);
         for ( let i = board[y].length - 1; i >= 0 ; i-- ){
             console.log(board[y][i])
@@ -164,9 +144,7 @@ function updateBoard(x,y){
             }
         }
     }else {
-        // console.log(board[x][y]);
-        // console.log(counter);
-        // console.log("true");
+    
         for ( let i = board[y].length - 1; i >= 0 ; i-- ){
             if(board[y][i] === null){
                 board[y][i] = true;
@@ -179,36 +157,12 @@ function updateBoard(x,y){
 function switchPlayer() {
     if (currentPlayer === "1") {
         currentPlayer = "-1";
+        currentPlayerEl.innerHTML = "It is Yellow's turn"
     } else {
         currentPlayer = "1";
+        currentPlayerEl.innerHTML = "It is Red's turn. "
     }
 };
-
-// ---- adding class to change color 
-// class of red overwrites cell background color
-// when "replay" is clicked, all extra class names are removed
-// reverting it back to white
-
-
-// getting tokens to slide down
-// check column that is being clicked
-// for loop through array to find the first "null" available in column
-// starting from the bottom up 
-
-
-// updateBoard(0,0);
-// counter++;
-// updateBoard(5,5);
-// counter++;
-// updateBoard(3,4);
-// counter++;
-// console.log(counter);
-// console.log(board);
-
-
-
-
-
 
 
 function checkWinner(){
@@ -223,27 +177,43 @@ function checkWinner(){
             circle3.style.backgroundColor === "red" &&
             circle4.style.backgroundColor === "red")
             {
-                currentPlayerEl.innerHTML = "Player 1 Wins! Play again?"
+                currentPlayerEl.innerHTML = "Red Wins! Play again?"
+                winner = true;
             }
             if (circle1.style.backgroundColor === "yellow" &&
                 circle2.style.backgroundColor === "yellow" &&
                 circle3.style.backgroundColor === "yellow" &&
                 circle4.style.backgroundColor === "yellow")
                 {
-                    currentPlayerEl.innerHTML = "Player 2 Wins! Play again?"
+                    currentPlayerEl.innerHTML = "Yellow Wins! Play again?"
+                    winner = false;
                 }
+                
     }
+    
 }
+
+function checkTie(){
+    let count = 0
+
+    board.forEach(function (col, idx) {
+        
+        col.forEach(function (cell,index){
+            if(board[idx][index] !== null){
+                count++
+            }
+        })
+    })
+    if(count === 42){
+        currentPlayerEl.innerHTML = "TIE NO WINNER"
+    }
+};
+
 
 function render() {
     board.forEach(function (col, idx) {
         
         col.forEach(function (cell,index){
-            
-            // console.log(col, idx, "<-- column",cell, index, "<-- row");
-            // console.log(circleEl[idx][index]);
-            // console.log(board[idx][index]);
-            // if( circleEl[index] === undefined) return
             let activeCircle = document.getElementById(`row-${index} col-${idx}`);
             if(board[idx][index] === null) {
                 activeCircle.style.backgroundColor = 'white'
@@ -255,12 +225,10 @@ function render() {
                 console.log(activeCircle, board[idx][index])
             }
             }
-            // else if (cell === true) {
-            //     circleEl[index].style.backgroundColor = "red";
-            //   } else (cell === false);{
-            //     circleEl[index].style.backgroundColor = "yellow";
-            //   }
+            
     )});
+    checkWinner();
+    checkTie();
     }
     
   
@@ -278,19 +246,9 @@ function init() {
         [null, null, null, null, null, null],
         [null, null, null, null, null, null]
     ];
-    currentPlayer = "1"; 
+    counter = 0;
+    currentPlayer = "-1";
+    currentPlayerEl.innerHTML = "Begin the game. It is Yellow's turn"
     winner = null;
     render();
 }
-
-
-
- // columns
- const column1 = [circleEl[35], circleEl[28], circleEl[21], circleEl[14], circleEl[7], circleEl[0]];
- const column2 = [circleEl[36], circleEl[29], circleEl[22], circleEl[15], circleEl[8], circleEl[1]];
- const column3 = [circleEl[37], circleEl[30], circleEl[23], circleEl[16], circleEl[9], circleEl[2]];
- const column4 = [circleEl[38], circleEl[31], circleEl[24], circleEl[17], circleEl[10], circleEl[3]];
- const column5 = [circleEl[39], circleEl[32], circleEl[25], circleEl[18], circleEl[11], circleEl[4]];
- const column6 = [circleEl[40], circleEl[33], circleEl[26], circleEl[19], circleEl[12], circleEl[5]];
- const column7 = [circleEl[41], circleEl[34], circleEl[27], circleEl[20], circleEl[13], circleEl[6]];
- const columns = [column1, column2, column3, column4, column5, column5, column7];

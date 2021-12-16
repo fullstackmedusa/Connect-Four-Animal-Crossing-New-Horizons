@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
   <script src="main.js" defer></script>
     <title>Alo's Game of Connect 4</title>
 </head>
 <body>
-        <h1 class= "title">Connect 4!</h1>
-        <h3>It is player <span id= current-player>1</span>'s turn </h3>
+        <h1 class= "title">Connect4</h1>
+        <h3 id= current-player></h3>
        <div class="gameBoard">
 
         <div class="cell row-0 col-0" id="row-0 col-0"></div>
@@ -63,6 +64,6 @@
     
     </div>
         <button id = "replay">Replay</button>
-        <div id = "winner-msg">First player with four in a row wins!</div>
+        <h4 id = "winner-msg">First player with four in a row wins!</h4>
 </body>
 </html>
