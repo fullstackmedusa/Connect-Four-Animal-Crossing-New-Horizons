@@ -140,9 +140,23 @@ function handleClick(e){
     let rowArg = circle.className[9];
     console.log(rowArg);
     counter = counter + 1;
-    if (currentPlayer === "1"){
+    
+    for (let i = 0; i < circleEl.length ; i++){
+        circleEl[i].onclick = () =>{
+            if (circelEl[i + 5] === null){
+                if (currentPlayer === 1){
+                    circleEl[i].classList.add("red")
+                }
+                if (currentPlayer === 2){
+                    circleEl[i].classList.add("yellow")
+                }
+            }
+        }
+    }
+
+    if (circleEl.className.includes("red")){
             circle.style.backgroundColor = "red";
-        } else {
+        } if (circleEl.className.includes("yellow")){
             circle.style.backgroundColor = "yellow";
         }
         
@@ -176,6 +190,16 @@ function switchPlayer() {
     }
 };
 
+// ---- adding class to change color 
+// class of red overwrites cell background color
+// when "replay" is clicked, all extra class names are removed
+// reverting it back to white
+
+
+// getting tokens to slide down
+// check column that is being clicked
+// for loop through array to find the first "null" available in column
+// starting from the bottom up 
 
 
 // updateBoard(0,0);
