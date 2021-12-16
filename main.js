@@ -133,9 +133,12 @@ function handleClick(e){
     if (!e.target.className.includes('cell')) return;
      
     let circle = e.target;
-    let x = e.target.className.includes()
-    let y =
-    console.log(circle);
+    console.log(circle.className);
+    
+    let colArg = circle.className[15];
+    console.log(colArg);
+    let rowArg = circle.className[9];
+    console.log(rowArg);
     counter = counter + 1;
     if (currentPlayer === "1"){
             circle.style.backgroundColor = "red";
@@ -143,9 +146,8 @@ function handleClick(e){
             circle.style.backgroundColor = "yellow";
         }
         
-    updateBoard();
+    updateBoard(rowArg,colArg);
     switchPlayer();
-    render();
     console.log(currentPlayer)
 };
 
@@ -155,11 +157,13 @@ function updateBoard(x,y){
         console.log(counter);
         // console.log("false");
         board[x][y]= false;
+        console.log(board);
     }else {
         // console.log(board[x][y]);
         // console.log(counter);
         // console.log("true");
         board[x][y]= true;
+        console.log(board);
     }
 
 }
@@ -202,20 +206,18 @@ function render() {
             // console.log(circleEl[idx][index]);
             // console.log(board[idx][index]);
             // if( circleEl[index] === undefined) return
-            if(circleEl[index].className === `cell row-${index} col-${idx}` && cell === null){
+    
              console.log("grabbing the string");
              circleEl[index].style.backgroundColor = "white";
             } 
-            if (cell === true) {
-                circleEl[index].style.backgroundColor = "red";
-              } else if (cell === false) {
-                circleEl[index].style.backgroundColor = "yellow";
-              }
-        });
-      
-    });
-  }
-
+            // else if (cell === true) {
+            //     circleEl[index].style.backgroundColor = "red";
+            //   } else (cell === false);{
+            //     circleEl[index].style.backgroundColor = "yellow";
+            //   }
+    )});
+    }
+    
   
 
   
