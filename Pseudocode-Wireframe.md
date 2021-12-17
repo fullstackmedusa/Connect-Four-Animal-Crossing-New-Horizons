@@ -1,8 +1,8 @@
 ## Pseudocode
 
-![Image of Connect Four Pseudo Code](https://imgur.com/gallery/zRHxFpX)
+![Image of Connect Four Pseudo Code](https://i.imgur.com/frWHDfH.jpg)
 
 
 ## Wireframe
 
-![Image of Connect Four Broswer Game Wireframe](https://imgur.com/gallery/8v9ftNf)
+![Image of Connect Four Broswer Game Wireframe](https://i.imgur.com/z0SInE3.jpg)
