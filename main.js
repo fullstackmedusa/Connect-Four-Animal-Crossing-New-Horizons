@@ -72,15 +72,14 @@ const winningCombos = [
     [12, 19, 26, 33],
     [13, 20, 27, 34],
     [9, 17, 25, 33],
-  ];
+];
 
- 
+
 
 
 //                      ----- State Variables ----- 
 
-// these are our state variables. they will keep track of whose turn it is, if anyone has won
-// and what board spots have already been taken and by what player
+
 let currentPlayer;
 let winner;
 let board;
@@ -88,18 +87,14 @@ let counter = 0;
 
 //                   ------ Cached Element References ------
 
-// cache the elements from the HTML that we will be referring back to often
-// for example the message that announces the winner, the message that 
-// tells us whose turn it is
-// and the circles on the board
 const circleEl = document.querySelectorAll(".cell");
-const currentPlayerEl = document.querySelector("#current-player"); // will display current player
-
+const currentPlayerEl = document.querySelector("#current-player"); 
+const replayEl = document.querySelector("#play-again");
 
 
 //             -------- Event Listeners ------
 
-// what this means is that upon clicking the 'replay' button. init function will run
+
 document.querySelector("#replay").addEventListener("click", init);
 document.querySelector(".gameBoard").addEventListener("click", handleClick)
 
@@ -109,51 +104,41 @@ document.querySelector(".gameBoard").addEventListener("click", handleClick)
 
 init();
 
-function handleClick(e){
+function handleClick(e) {
     console.log(e.target.className)
     if (!e.target.className.includes('cell')) return;
-    if(winner !== null) return;
-     
+    if (winner !== null) return;
     let circle = e.target;
-    console.log(circle.className);
-    
     let colArg = circle.className[15];
-    console.log(colArg);
     let rowArg = circle.className[9];
-    console.log(rowArg);
-    counter = counter + 1;  
-    updateBoard(rowArg,colArg);
+    counter = counter + 1;
+    updateBoard(rowArg, colArg);
     switchPlayer();
     render();
 };
 
-function updateBoard(x,y){
-    if (board[y][x] !== null){
+function updateBoard(x, y) {
+    if (board[y][x] !== null) {
         return;
     }
-    if (counter % 2){
-        
-        console.log(counter);
-        
-        console.log(board[y]);
-        for ( let i = board[y].length - 1; i >= 0 ; i-- ){
+    if (counter % 2) {
+        for (let i = board[y].length - 1; i >= 0; i--) {
             console.log(board[y][i])
-            if ( board[y][i] === null){
+            if (board[y][i] === null) {
                 board[y][i] = false;
                 return;
             }
         }
-    }else {
-    
-        for ( let i = board[y].length - 1; i >= 0 ; i-- ){
-            if(board[y][i] === null){
+    } else {
+        for (let i = board[y].length - 1; i >= 0; i--) {
+            if (board[y][i] === null) {
                 board[y][i] = true;
                 return;
             }
+        }
     }
+}
 
-}
-}
 function switchPlayer() {
     if (currentPlayer === "1") {
         currentPlayer = "-1";
@@ -165,46 +150,41 @@ function switchPlayer() {
 };
 
 
-function checkWinner(){
-    for (let i = 0; i < winningCombos.length; i++){
+function checkWinner() {
+    for (let i = 0; i < winningCombos.length; i++) {
         const circle1 = circleEl[winningCombos[i][0]]
         const circle2 = circleEl[winningCombos[i][1]]
         const circle3 = circleEl[winningCombos[i][2]]
         const circle4 = circleEl[winningCombos[i][3]]
-        console.log(circle1)
         if (circle1.style.backgroundColor === "red" &&
             circle2.style.backgroundColor === "red" &&
             circle3.style.backgroundColor === "red" &&
-            circle4.style.backgroundColor === "red")
-            {
-                currentPlayerEl.innerHTML = "Red Wins! Play again?"
-                winner = true;
-            }
-            if (circle1.style.backgroundColor === "yellow" &&
-                circle2.style.backgroundColor === "yellow" &&
-                circle3.style.backgroundColor === "yellow" &&
-                circle4.style.backgroundColor === "yellow")
-                {
-                    currentPlayerEl.innerHTML = "Yellow Wins! Play again?"
-                    winner = false;
-                }
-                
+            circle4.style.backgroundColor === "red") {
+            currentPlayerEl.innerHTML = "Red Wins!"
+            winner = true;
+            replayEl.innerHTML = "Play Again?";
+        }
+        if (circle1.style.backgroundColor === "yellow" &&
+            circle2.style.backgroundColor === "yellow" &&
+            circle3.style.backgroundColor === "yellow" &&
+            circle4.style.backgroundColor === "yellow") {
+            currentPlayerEl.innerHTML = "Yellow Wins! "
+            winner = false;
+            replayEl.innerHTML = "Play Again?";
+        }
     }
-    
 }
 
-function checkTie(){
+function checkTie() {
     let count = 0
-
     board.forEach(function (col, idx) {
-        
-        col.forEach(function (cell,index){
-            if(board[idx][index] !== null){
+        col.forEach(function (cell, index) {
+            if (board[idx][index] !== null) {
                 count++
             }
         })
     })
-    if(count === 42){
+    if (count === 42) {
         currentPlayerEl.innerHTML = "TIE NO WINNER"
     }
 };
@@ -212,28 +192,26 @@ function checkTie(){
 
 function render() {
     board.forEach(function (col, idx) {
-        
-        col.forEach(function (cell,index){
+        col.forEach(function (cell, index) {
             let activeCircle = document.getElementById(`row-${index} col-${idx}`);
-            if(board[idx][index] === null) {
+            if (board[idx][index] === null) {
                 activeCircle.style.backgroundColor = 'white'
-            } else if (board[idx][index] === true ){
+            } else if (board[idx][index] === true) {
                 activeCircle.style.backgroundColor = 'red'
-                console.log(activeCircle, board[idx][index])
             } else {
-                activeCircle.style.backgroundColor = 'yellow'
-                console.log(activeCircle, board[idx][index])
+                activeCircle.style.backgroundColor = 'yellow'  
             }
-            }
-            
-    )});
+        }
+
+        )
+    });
     checkWinner();
     checkTie();
-    }
-    
-  
+}
 
-  
+
+
+
 
 
 function init() {
@@ -248,7 +226,8 @@ function init() {
     ];
     counter = 0;
     currentPlayer = "-1";
-    currentPlayerEl.innerHTML = "Begin the game. It is Yellow's turn"
+    currentPlayerEl.innerHTML = "Begin the game. Yellow goes first"
+    replayEl.innerHTML = " "
     winner = null;
     render();
 }
