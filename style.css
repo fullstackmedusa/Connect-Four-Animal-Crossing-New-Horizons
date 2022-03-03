@@ -5,19 +5,16 @@
   }
   
   .title{
-      font-family: 'Poppins', sans-serif;
-      font-size: 70px;
-      color: Red;
-      border: 5px solid black;
-      border-radius: 10px;
-      background-color: white;
-
-
+      font-family: 'Kaushan Script', cursive;
+      font-size: 30px;
+      color: white;
+      text-shadow: 2px 2px #00AEAE;
   }
 
   body {
     align-items: center;
-    background: whitesmoke;
+    background-image: url('imgs/acnhbeach.png');
+    background-size: cover;
     display: flex;
     flex-direction: column;
     font-family: sans-serif;
@@ -31,17 +28,17 @@
     height: 500px;
     margin: 10px 10px 10px;
     width: 700px;
-    background-color: blue;
-    border: 6px solid black;
+    background-color: RGB(248, 131, 121, 0.8);
+    border: 6px solid #E2DFD2;
+    border-radius: 2rem;
   }
   
   .cell {
     align-items: center;
     display: flex;
-    justify-content: center;
-    background-color: white;
+    justify-content: center; 
    border-radius: 50%;
-   border: 3px solid black;
+   border: 3px solid #E2DFD2;
    content: '';
    cursor: pointer;
    height: 75px;
@@ -53,9 +50,10 @@
  
   h3 {
       padding-top: 15px;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Kaushan Script', cursive;
       font-size: 20px;
       color:black;
+      
       
   }
   
@@ -66,16 +64,38 @@
   }
 
   #replay{
-      font-size: 40px;
-      font-family: 'Poppins', sans-serif;
+      font-size: 30px;
+      padding: 5px;
+      text-align: center;
+      font-family: 'Kaushan Script', cursive;
       transition-duration: 0.3s;
-      border: 2px solid #efcc00;
+      border: 2px solid #00AEAE;
       border-radius:8px;
-      background-color: #ffd800;
+      background-color: #92C4EE;
+      color: white;
 
   }
 
   #replay:hover{
-    background-color: red;
+    background-color: #A45F66;
    cursor: pointer;
   }
+
+  .tommyPlay {
+    background-image: url('imgs/tommy.jpg');
+    align-items: auto;
+    background-size: contain;
+    border-radius: 50%;
+  }
+  
+  .timmyPlay {
+    background-image: url('imgs/timmy.jpeg');
+    position: right 20px;
+    background-size: contain;
+    border-radius: 50%;
+  }
+
+ .logo {
+   max-width: 190px;
+   max-height: 140px;
+ }

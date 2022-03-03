@@ -1,5 +1,6 @@
 // ---------- Constants -------- //
 
+const welcome = new Audio('music/beach.mp3');
 
 const winningCombos = [
     [0, 1, 2, 3],
@@ -98,11 +99,18 @@ const replayEl = document.querySelector("#play-again");
 document.querySelector("#replay").addEventListener("click", init);
 document.querySelector(".gameBoard").addEventListener("click", handleClick)
 
+document.addEventListener('click', musicWelcome)
+
 
 
 //           ----- Functions -----
 
 init();
+
+function musicWelcome() {
+    welcome.play();
+    welcome.volume = 0.25;
+}
 
 function handleClick(e) {
     console.log(e.target.className)
@@ -142,10 +150,10 @@ function updateBoard(x, y) {
 function switchPlayer() {
     if (currentPlayer === "1") {
         currentPlayer = "-1";
-        currentPlayerEl.innerHTML = "It is Yellow's turn"
+        currentPlayerEl.innerHTML = "It is Timmy's turn"
     } else {
         currentPlayer = "1";
-        currentPlayerEl.innerHTML = "It is Red's turn. "
+        currentPlayerEl.innerHTML = "It is Tommy's turn. "
     }
 };
 
@@ -160,15 +168,15 @@ function checkWinner() {
             circle2.style.backgroundColor === "red" &&
             circle3.style.backgroundColor === "red" &&
             circle4.style.backgroundColor === "red") {
-            currentPlayerEl.innerHTML = "Red Wins!"
+            currentPlayerEl.innerHTML = "Tommy Wins!"
             winner = true;
-            replayEl.innerHTML = "Play Again?";
+            replayEl.innerHTML = "Play Again?"; 
         }
         if (circle1.style.backgroundColor === "yellow" &&
             circle2.style.backgroundColor === "yellow" &&
             circle3.style.backgroundColor === "yellow" &&
             circle4.style.backgroundColor === "yellow") {
-            currentPlayerEl.innerHTML = "Yellow Wins! "
+            currentPlayerEl.innerHTML = "Timmy Wins! "
             winner = false;
             replayEl.innerHTML = "Play Again?";
         }
@@ -196,10 +204,15 @@ function render() {
             let activeCircle = document.getElementById(`row-${index} col-${idx}`);
             if (board[idx][index] === null) {
                 activeCircle.style.backgroundColor = 'white'
+                activeCircle.style.backgroundImage = false
+                activeCircle.classList.remove('tommyPlay')
+                activeCircle.classList.remove('timmyPlay')
             } else if (board[idx][index] === true) {
-                activeCircle.style.backgroundColor = 'red'
+                activeCircle.classList.add('tommyPlay')
+                activeCircle.style.backgroundColor = "red"
             } else {
-                activeCircle.style.backgroundColor = 'yellow'  
+                activeCircle.classList.add('timmyPlay')
+                activeCircle.style.backgroundColor = "yellow"
             }
         }
 
@@ -226,8 +239,10 @@ function init() {
     ];
     counter = 0;
     currentPlayer = "-1";
-    currentPlayerEl.innerHTML = "Begin the game. Yellow goes first"
+    currentPlayerEl.innerHTML = "Begin the game. Timmy goes first"
     replayEl.innerHTML = " "
     winner = null;
     render();
 }
+
+
