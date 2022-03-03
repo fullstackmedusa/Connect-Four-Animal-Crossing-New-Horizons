@@ -1,29 +1,26 @@
-# Project-1
-## Connect4 Browser Game
+# Project 1 for General Assembly Software Engineer Immersive Bootcamp
+## Animal Crossing New Horizons themed Connect Four browser game.
 
-Connect4: The classic four in a row game!
+Enjoy the classic four-in-a-row game with a twist! Inspired by Nintendo's Animal Crossing New Horizons summer beach theme is this simple connect four broswer game. Play as either Timmy or Tommy.
 
-The objective of connect4 is simple, be the first to get four of your colored discs in a row (vertical, horizontal, or diagonal) wins!
+The objective of connect four is simple, be the first to get four of your tokens in a row (vertical, horizontal, or diagonal) wins!
 
-This gameboard is based on the Hasbro Connect4 game with the blue grid and yellow & red discs.
-
----
-
-According to gamecrafters.berkeley.edu, the name “Connect Four” was first coined by Milton Bradley Company in 1974. The company, founded by Milton Bradley himself  in 1860, is known for its contributions in the board game and video game industries.
+This gameboard is features Tommy (in orange beach tube) and Timmy (in green beach tube) tokens, as well as some ACNH beach themed background music.
 
 ---
+
 
 ### Game Screen at start of game
-![Connect4 Screenshot of Gameboard Before Playing](https://i.imgur.com/e7F3l9O.png)
+![Connect4 Screenshot of Gameboard Before Playing](https://i.imgur.com/iGXz5Rg.png)
 
 ----
 
 ### Player turns are indicated at the top of the screen
-![Connect4 Screenshot of Gameboard During Gameplay](https://i.imgur.com/DBqM2pE.png)
+![Connect4 Screenshot of Gameboard During Gameplay](https://i.imgur.com/V0tVdZN.png)
 
 ---
-### Winner is displayed on top os screen
-![Connect4 Screenshot of Gameboard After Win](https://i.imgur.com/xjM1zxd.png)
+### Winner is displayed on top of screen
+![Connect4 Screenshot of Gameboard After Win](https://i.imgur.com/hbSoHhz.png)
 ---
 
 ### Technologies used for game creation:
@@ -33,7 +30,7 @@ According to gamecrafters.berkeley.edu, the name “Connect Four” was first co
 
 ----
 
-### Play the game: [Connect4](https://lark09.github.io/Project-1)
+### Play the game: [Connect Four](https://lark09.github.io/Project-1)
 
 ---
 
@@ -42,4 +39,4 @@ According to gamecrafters.berkeley.edu, the name “Connect Four” was first co
 
 - Animated disc drop
 
-- Retro Player wins message that blocks entire gameboard
+- Win message that blocks entire gameboard
