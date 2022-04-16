@@ -30,7 +30,7 @@ This gameboard is features Tommy (in orange beach tube) and Timmy (in green beac
 
 ----
 
-### Play the game: [Connect Four](https://lark09.github.io/Project-1)
+### Play the game: [Connect Four](https://lark09.github.io/Connect-Four-Animal-Crossing-New-Horizons)
 
 ---
 
